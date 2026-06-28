@@ -11,8 +11,8 @@ jobs:
     environment: PROD
     env:
       BASE_URL: ${{ secrets.BASEURL }}
-      EMAIL: ${{ secrets.STANDARD_USERNAME }}
-      PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
+      STANDARD_USERNAME: ${{ secrets.STANDARD_USERNAME }}
+      STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
       
     steps:
     - uses: actions/checkout@v4
