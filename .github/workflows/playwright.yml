@@ -8,6 +8,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    environment: PROD
     env:
       BASE_URL: ${{ secrets.BASEURL }}
       EMAIL: ${{ secrets.STANDARD_USERNAME }}
