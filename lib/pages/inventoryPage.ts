@@ -23,27 +23,27 @@ export class InventoryPage {
         });
     }
 
-    private getProductName(card: Locator): Locator {
+    protected getProductName(card: Locator): Locator {
         return card.getByTestId('inventory-item-name');
     }
 
-    private getProductDescription(card: Locator): Locator {
+    protected getProductDescription(card: Locator): Locator {
         return card.getByTestId('inventory-item-desc');
     }
 
-    private getProductPrice(card: Locator): Locator {
+    protected getProductPrice(card: Locator): Locator {
         return card.getByTestId('inventory-item-price');
     }
 
-    private getProductImage(card: Locator): Locator {
+    protected getProductImage(card: Locator): Locator {
         return card.getByRole('img');
     }
 
-    private getAddToCartButton(card: Locator): Locator {
+    protected getAddToCartButton(card: Locator): Locator {
         return card.getByRole('button', {name: 'Add to cart'});
     }
 
-    private getRemoveFromCartButton(card: Locator): Locator {
+    protected getRemoveFromCartButton(card: Locator): Locator {
         return card.getByRole('button', {name: 'Remove'});
     }
 
