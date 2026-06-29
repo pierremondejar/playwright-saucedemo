@@ -1,5 +1,5 @@
 import { test } from '@fixtures/pages.fixtures'       
-import { credentials } from '@datafactory/credentials';
+import { credentials } from '@datafactory/credentialsFactory';
 import { expect } from '@playwright/test';
 
 test.describe('Login Page', () => {

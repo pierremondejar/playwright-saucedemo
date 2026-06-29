@@ -14,6 +14,7 @@
     //"baseUrl": "./",
     "paths": {
         "@pages/*": ["./lib/pages/*"],
+        "@interfaces/*": ["./lib/interfaces/*"],
         "@datafactory/*": ["./lib/datafactory/*"],
         "@fixtures/*": ["./lib/fixtures/*"],
         "@tests/*": ["./tests/*"]
