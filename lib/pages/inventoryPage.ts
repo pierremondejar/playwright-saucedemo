@@ -30,6 +30,10 @@ export class InventoryPage {
         return card.getByTestId('inventory-item-price');
     }
 
+    private getProductImage(card: Locator): Locator {
+        return card.getByRole('img');
+    }
+
     async verifyProductDetails(product: Product) {
         const card = this.getProductCard(product);
 
@@ -38,6 +42,7 @@ export class InventoryPage {
         await expect(this.getProductName(card)).toHaveText(product.productName);
         await expect(this.getProductDescription(card)).toHaveText(product.productDescription);
         await expect(this.getProductPrice(card)).toHaveText(`$${product.productPrice}`);
+        await expect(this.getProductImage(card)).toHaveScreenshot(product.productName+'.png', {maxDiffPixelRatio: 0.01})
     }
 
     async verifyAllProductDetails(products: Product[]) {
