@@ -40,7 +40,21 @@ export class ProductData {
         },
     ];
 
-    static getByName(productName: string): Product | undefined {
-        return this.products.find((p) => p.productName === productName);
+    static getProductsSorted(
+        sortBy: "name" | "price",
+        order: "asc" | "desc" = "asc"
+    ): Product[] {
+        return [...this.products].sort((a, b) => {
+            let comparison = 0;
+
+            if (sortBy === "name") {
+                comparison = a.productName.localeCompare(b.productName);
+            } else {
+                comparison = a.productPrice - b.productPrice;
+            }
+
+            return order === "asc" ? comparison : -comparison;
+        });
     }
+
 }

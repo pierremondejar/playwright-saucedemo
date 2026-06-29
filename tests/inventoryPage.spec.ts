@@ -19,4 +19,14 @@ test.describe('Inventory Page', () => {
         await inventoryPage.addAllToCart(ProductData.products);
         await inventoryPage.removeAllFromCart(ProductData.products);
     })
+
+    test('should be able to sort products by name', async({inventoryPage}) => {
+        await inventoryPage.verifyAllProductDetails(await inventoryPage.sortByName('desc'));
+        await inventoryPage.verifyAllProductDetails(await inventoryPage.sortByName('asc'));
+    })
+
+    test('should be able to sort products by price', async({inventoryPage}) => {
+        await inventoryPage.verifyAllProductDetails(await inventoryPage.sortByPrice('asc'));
+        await inventoryPage.verifyAllProductDetails(await inventoryPage.sortByPrice('desc'));
+    })
 })
