@@ -4,10 +4,12 @@ import { Product } from '@interfaces/Product';
 export class InventoryPage {
     readonly page: Page;
     readonly productCards: Locator;
+    readonly cartBadge: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.productCards = page.getByTestId('inventory-item');
+        this.cartBadge = page.getByTestId('shopping-cart-badge');
     }
 
     private getProductCard(product: Product): Locator {
@@ -34,6 +36,14 @@ export class InventoryPage {
         return card.getByRole('img');
     }
 
+    private getAddToCartButton(card: Locator): Locator {
+        return card.getByRole('button', {name: 'Add to cart'});
+    }
+
+    private getRemoveFromCartButton(card: Locator): Locator {
+        return card.getByRole('button', {name: 'Remove'});
+    }
+
     async verifyProductDetails(product: Product) {
         const card = this.getProductCard(product);
 
@@ -50,6 +60,40 @@ export class InventoryPage {
 
         for (const product of products) {
             await this.verifyProductDetails(product);
+        }
+    }
+
+    async addToCart(product: Product) {
+        const card = this.getProductCard(product);
+        await this.getAddToCartButton(card).click();
+    }
+
+    async addAllToCart(products: Product[]) {
+        let count: number = 0;
+        for (const product of products) {
+            await this.addToCart(product);
+            count++;
+            await expect(this.cartBadge).toHaveText(String(count))
+        }
+    }
+
+    async removeFromCart(product: Product) {
+        const card = this.getProductCard(product);
+        await this.getRemoveFromCartButton(card).click();
+    }
+
+    async removeAllFromCart(products: Product[]) {
+        let count: number = Number(await this.cartBadge.innerText());
+        for (const product of products) {
+            await this.removeFromCart(product);
+            count--;
+
+            if(count != 0) {
+                await expect(this.cartBadge).toHaveText(String(count));
+            }
+            else {
+                await expect(this.cartBadge).toBeHidden();
+            }
         }
     }
 }
