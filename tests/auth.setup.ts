@@ -1,9 +1,9 @@
 import { test as setup } from '@playwright/test';
 
 setup('Authenticate', async ({ page}) => {
-    const username = process.env.STANDARD_USERNAME;
-    const password = process.env.STANDARD_PASSWORD;
-    const baseURL = process.env.BASEURL;
+    const username = process.env.STANDARD_USERNAME!;
+    const password = process.env.STANDARD_PASSWORD!;
+    const baseURL = process.env.BASEURL!;
 
     if (!baseURL) throw new Error('Environment variable BASEURL is not set');
     if (!username) throw new Error('Environment variable STANDARD_USERNAME is not set');
