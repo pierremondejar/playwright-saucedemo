@@ -34,7 +34,6 @@ export class ItemPage extends InventoryPage {
     }
 
     async verifyItemDetails(product:Product){
-        //const test =  this.itemImageContainer.filter({has: this.page.locator('.inventory_details_img')})
         await expect(this.itemName).toHaveText(product.productName);
         await expect(this.itemDescription).toHaveText(product.productDescription);
         await expect(this.itemPrice).toHaveText(`$${product.productPrice}`);
