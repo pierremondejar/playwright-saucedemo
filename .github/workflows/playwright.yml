@@ -8,7 +8,6 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    environment: PROD
     env:
       BASEURL: ${{ secrets.BASEURL }}
       STANDARD_USERNAME: ${{ secrets.STANDARD_USERNAME }}
@@ -31,3 +30,4 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+ 
