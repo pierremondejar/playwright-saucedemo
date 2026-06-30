@@ -1,6 +1,5 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { Product } from '@interfaces/Product';
-import { ProductData } from '@datafactory/productsFactory';
 import { InventoryPage } from './inventoryPage';
 
 export class ItemPage extends InventoryPage {

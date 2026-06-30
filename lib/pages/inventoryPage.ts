@@ -7,12 +7,14 @@ export class InventoryPage {
     readonly productCards: Locator;
     readonly cartBadge: Locator;
     readonly sortDropdown: Locator;
+    readonly cartButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.productCards = page.getByTestId('inventory-item');
         this.cartBadge = page.getByTestId('shopping-cart-badge');
         this.sortDropdown = page.getByTestId('product-sort-container');
+        this.cartButton = page.getByTestId('shopping-cart-link');
     }
 
     private getProductCard(product: Product): Locator {

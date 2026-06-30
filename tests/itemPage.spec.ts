@@ -1,7 +1,7 @@
 import { test } from '@fixtures/pages.fixtures'       
 import { ProductData } from '@datafactory/productsFactory';
 
-test.describe('Inventory Page', () => {
+test.describe('Item Page', () => {
     test.beforeEach(async({itemPage}) => {
         await itemPage.page.goto('/inventory.html');
     })
