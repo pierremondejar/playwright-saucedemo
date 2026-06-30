@@ -15,7 +15,20 @@ test.describe('Checkout Page', () => {
         await checkoutPage.inputValidCustomerDetails(CustomerData.validCustomers);
     })
 
-    test('should be able handle invalid customer details input', async({checkoutPage}) => {
+    test('should be able to handle invalid customer details input', async({checkoutPage}) => {
         await checkoutPage.inputInvalidCustomerDetails(CustomerData.invalidCustomers);
+    })
+
+    test('should be able to verify all checkout info', async({checkoutPage}) => {
+        await checkoutPage.inputCustomerData(CustomerData.validCustomers);
+        await checkoutPage.continueButton.click();
+        await checkoutPage.verifyAllCheckoutInfo(ProductData.products);
+    })
+
+    test('should be able to complete the checkout process', async({checkoutPage}) => {
+        await checkoutPage.inputCustomerData(CustomerData.validCustomers);
+        await checkoutPage.continueButton.click();
+        await checkoutPage.finishButton.click();
+        await checkoutPage.verifyCheckoutCompletePage();
     })
 })
