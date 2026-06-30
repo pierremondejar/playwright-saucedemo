@@ -1,13 +1,13 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { Product } from '@interfaces/Product';
-import { ProductData } from '@datafactory/productsFactory';
-import { InventoryPage } from './inventoryPage';
+import { InventoryPage } from '@pages/inventoryPage';
 
 export class CartPage extends InventoryPage {
     readonly page: Page;
     readonly itemName: Locator;
     readonly itemDescription: Locator;
     readonly itemPrice: Locator;
+    readonly checkoutButton: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -15,6 +15,7 @@ export class CartPage extends InventoryPage {
         this.itemName = page.getByTestId('inventory-item-name');
         this.itemDescription = page.getByTestId('inventory-item-desc');
         this.itemPrice = page.getByTestId('inventory-item-price');
+        this.checkoutButton = page.getByRole('button', {name: 'Checkout'})
     }
 
     async verifyCartItems(products: Product[]) {

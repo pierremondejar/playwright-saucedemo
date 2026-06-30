@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { Product } from '@interfaces/Product';
-import { InventoryPage } from './inventoryPage';
+import { InventoryPage } from '@pages/inventoryPage';
 
 export class ItemPage extends InventoryPage {
     readonly page: Page;
