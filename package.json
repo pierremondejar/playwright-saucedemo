@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test --config=playwright.config.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pierremondejar/playwright-saucedemo.git"
@@ -18,9 +20,11 @@
   "homepage": "https://github.com/pierremondejar/playwright-saucedemo#readme",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
+    "@reportportal/agent-js-playwright": "^5.0.11",
     "@types/node": "^26.0.1"
   },
   "dependencies": {
     "dotenv": "^17.4.2"
   }
+  
 }

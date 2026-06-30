@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ staging, main, master ]
+    branches: [ feature/reporting, main, master ]
   pull_request:
-    branches: [ staging, main, master ]
+    branches: [ feature/reporting, main, master ]
 jobs:
   test:
     timeout-minutes: 60
@@ -13,7 +13,7 @@ jobs:
       BASEURL: ${{ secrets.BASEURL }}
       STANDARD_USERNAME: ${{ secrets.STANDARD_USERNAME }}
       STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
-      
+      RPAPIKEY: ${{ secrets.RPAPIKEY }}
     steps:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v5
