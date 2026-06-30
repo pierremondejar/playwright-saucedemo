@@ -13,7 +13,7 @@ jobs:
       BASEURL: ${{ secrets.BASEURL }}
       STANDARD_USERNAME: ${{ secrets.STANDARD_USERNAME }}
       STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
-      
+      RPAPIKEY: ${{ secrets.RPAPIKEY }}
     steps:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v5

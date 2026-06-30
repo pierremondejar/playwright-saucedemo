@@ -1,8 +1,26 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, PlaywrightTestConfig } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+const rpConfig = {
+  endpoint: "https://demo.reportportal.io/api/v1",
+  apiKey: process.env.RPAPIKEY,
+  project: "pierremondejar_personal",
+  launch: "Saucedemo Test Launch",
+  description: "A demo test launch for saucedemo.com",
+  attributes: [
+    {
+      key: "attributeKey",
+      value: "attrbiuteValue",
+    },
+    {
+      value: "anotherAttrbiuteValue",
+    },
+  ],
+  mode: 'DEFAULT',
+}
 
 
 /**
@@ -19,7 +37,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['@reportportal/agent-js-playwright', rpConfig]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -84,3 +102,10 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
+
+
+
+
+
+
+
