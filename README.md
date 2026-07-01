@@ -118,14 +118,14 @@ Before running the suite, ensure the following are installed:
 
    ```env
    BASEURL=https://www.saucedemo.com
-   STANDARD_USERNAME=<valid_username>
-   STANDARD_PASSWORD=<valid_password>
+   STANDARD_USERNAME=standard_user
+   STANDARD_PASSWORD=secret_sauce
    ```
 
    Optional values for ReportPortal:
 
    ```env
-   RPAPIKEY=<your_reportportal_api_key>
+   RPAPIKEY=your_reportportal_api_key
    ```
 
 ## Running Tests
@@ -205,4 +205,4 @@ If tests fail unexpectedly:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the ISC License.

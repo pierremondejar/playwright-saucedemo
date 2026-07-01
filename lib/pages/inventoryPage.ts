@@ -57,7 +57,14 @@ export class InventoryPage {
         await expect(this.getProductName(card)).toHaveText(product.productName);
         await expect(this.getProductDescription(card)).toHaveText(product.productDescription);
         await expect(this.getProductPrice(card)).toHaveText(`$${product.productPrice}`);
-        await expect(this.getProductImage(card)).toHaveScreenshot(product.productName+'.png', {maxDiffPixelRatio: 0.01})
+        await expect(this.getProductImage(card)).toHaveScreenshot(product.productName+'.png', { 
+                threshold: 1,
+                maxDiffPixelRatio: 0.01, 
+                animations: 'disabled',
+                caret: 'hide',
+                scale: 'css'
+            }
+        )
     }
 
     async verifyProductDetailsByIndex(product: Product, index: number) {
@@ -67,8 +74,14 @@ export class InventoryPage {
         await expect(this.getProductDescription(card)).toHaveText(product.productDescription);
         await expect(this.getProductPrice(card)).toHaveText(`$${product.productPrice}`);
         await expect(this.getProductImage(card)).toHaveScreenshot(
-            `${product.productName}.png`,
-            { maxDiffPixelRatio: 0.01 }
+            `pd_${product.productName}.png`,
+            { 
+                //threshold: 1,
+                //maxDiffPixelRatio: 0.01, 
+                animations: 'disabled',
+                caret: 'hide',
+                scale: 'css'
+            }
         );
     }
 

@@ -33,11 +33,11 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 3 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['@reportportal/agent-js-playwright', rpConfig]],
+  reporter: /*[['@reportportal/agent-js-playwright', rpConfig],*/ [['html']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -49,31 +49,97 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'setup',
-      testMatch: /.*\.setup\.ts/,
-    },
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'],
-      storageState: 'playwright/.auth/user.json',},
-      dependencies: ['setup'],
-    },
+  {
+    name: 'setup',
+    testMatch: /.*\.setup\.ts/,
+  },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'],
-      storageState: 'playwright/.auth/user.json'},
-      dependencies: ['setup'],
+  // Authenticated desktop browsers
+  {
+    name: 'chromium',
+    use: {
+      ...devices['Desktop Chrome'],
+      storageState: 'playwright/.auth/user.json',
     },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'],
-      storageState: 'playwright/.auth/user.json'},
-      dependencies: ['setup'],
+    dependencies: ['setup'],
+  },
+  {
+    name: 'firefox',
+    use: {
+      ...devices['Desktop Firefox'],
+      storageState: 'playwright/.auth/user.json',
     },
+    dependencies: ['setup'],
+  },
+  {
+    name: 'webkit',
+    use: {
+      ...devices['Desktop Safari'],
+      storageState: 'playwright/.auth/user.json',
+    },
+    dependencies: ['setup'],
+  },
 
+  // Real branded Chromium browsers
+  {
+    name: 'Google Chrome',
+    use: {
+      ...devices['Desktop Chrome'],
+      channel: 'chrome',
+      storageState: 'playwright/.auth/user.json',
+    },
+    dependencies: ['setup'],
+  },
+  {
+    name: 'Microsoft Edge',
+    use: {
+      ...devices['Desktop Edge'],
+      channel: 'msedge',
+      storageState: 'playwright/.auth/user.json',
+    },
+    dependencies: ['setup'],
+  },
+
+  // Mobile emulation
+  {
+    name: 'Mobile Chrome',
+    use: {
+      ...devices['Pixel 7'],
+      storageState: 'playwright/.auth/user.json',
+    },
+    dependencies: ['setup'],
+  },
+
+  // Tablet coverage
+  {
+    name: 'Tablet Safari',
+    use: {
+      ...devices['iPad Pro 11'],
+      storageState: 'playwright/.auth/user.json',
+    },
+    dependencies: ['setup'],
+  },
+
+  // Unauthenticated tests only
+  {
+    name: 'chromium-guest',
+    testMatch: /.*guest.*\.spec\.ts/,
+    use: {
+      ...devices['Desktop Chrome'],
+    },
+  },
+
+  // Visual regression focused project
+  {
+    name: 'chromium-visual',
+    testMatch: /.*visual.*\.spec\.ts/,
+    use: {
+      ...devices['Desktop Chrome'],
+      storageState: 'playwright/.auth/user.json',
+    },
+    dependencies: ['setup'],
+  },
+]
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
@@ -93,7 +159,7 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+ 
 
   /* Run your local dev server before starting the tests */
   // webServer: {

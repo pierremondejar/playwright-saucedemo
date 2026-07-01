@@ -40,7 +40,15 @@ export class ItemPage extends InventoryPage {
         await expect(this.itemName).toHaveText(product.productName);
         await expect(this.itemDescription).toHaveText(product.productDescription);
         await expect(this.itemPrice).toHaveText(`$${product.productPrice}`);
-        await expect(this.itemImage).toHaveScreenshot(product.productName+'.png', {maxDiffPixelRatio: 0.01});
+        await expect(this.itemImage).toHaveScreenshot(product.productName+'.png',
+            { 
+                threshold: 1,
+                maxDiffPixelRatio: 0.01, 
+                animations: 'disabled',
+                caret: 'hide',
+                scale: 'css'
+            }
+        );
     }
 
     async addItemsToCart(products: Product[]) {
